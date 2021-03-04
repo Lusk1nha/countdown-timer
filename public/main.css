@@ -57,10 +57,15 @@ body {
 
   border-radius: 8px;
 
+  -webkit-user-select: none;  
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
 }
 
 .time {
-  width: 90px;
+  width: 130px;
   height: 75%;
 
   display: flex;
@@ -72,12 +77,6 @@ body {
 
 }
 
-.time.seconds {
-  width: 95px;
-
-  margin-left: 5px;
-
-}
 
 .time span {
   width: 100%;
@@ -96,13 +95,13 @@ body {
 
 }
 
-.time.seconds span {
+.time span.seconds {
   border: none;
 
 }
 
 .time h5 {
-  font-size: 3.2vmin;
+  font-size: 3vmin;
   font-weight: 600;
 
 }
@@ -197,13 +196,13 @@ body {
   }
 
   #container {
-    max-width: 1100px;
-    width: 90%;
+    max-width: 1050px;
+    width: 95%;
 
   }
 
   .timerContainer {
-    height: 300px;
+    height: 250px;
 
   }
 
@@ -213,14 +212,9 @@ body {
 
   }
 
-  .time.seconds {
-    width: 200px;
-
-  }
-
   .time span {
     height: 80px;
-    font-size: 4.5em;
+    font-size: 4.2em;
 
     margin-bottom: 20px;
 

@@ -59,7 +59,8 @@ function settingCountDown() {
   const userDate = dateNow()
   
   if((!validateCountDown(inputValue, userDate))) return
-  console.log(inputValue)
+
+  startingTimer(inputValue, userDate)
 
 
   function validateCountDown(inputDate, dateNow) {
@@ -83,6 +84,18 @@ function settingCountDown() {
     }
 
     return true
+  }
+
+  function startingTimer(inputDate, dateNow) {
+    const daysContainer = document.querySelector('.time span.days')
+
+    let days = 0
+
+    const yearsToDays = inputDate.year - dateNow.year
+    days += 365 * yearsToDays
+
+    daysContainer.innerHTML = days
+
   }
 
 }
