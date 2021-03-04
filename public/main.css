@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
 * {
   box-sizing: border-box;
 
   margin: 0;
   padding: 0;
-
+  
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -17,10 +20,13 @@ body {
 
 }
 
-#container {
-  background-color: white;
+[hidden] {
+  display: none !important;
 
-  width: 85%;
+}
+
+#container {
+  width: 100%;
   height: 500px;
 
   display: flex;
@@ -33,21 +39,65 @@ body {
 }
 
 .timerContainer {
-  background-color: lightblue;
+  background-color: white;
 
-  width: 100%;
-  height: 100px;
+  width: 96%;
+  height: 120px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  margin-bottom: 50px;
+
+  border-radius: 8px;
+
 }
 
-.timerContainer .time {
+.time {
+  width: 90px;
+  height: 75%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  color: darkorange;
+
+}
+
+.time:last-child {
+  width: 95px;
+
+  margin-left: 5px;
+
+}
+
+.time span {
+  width: 100%;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2.5em;
+  font-weight: 400;
+
+  margin-bottom: 5px;
+
+  border-right: 1px solid darkorange;
+
+}
+
+.time.seconds span {
+  border: none;
+
+}
+
+.time h5 {
+  font-size: 0.85em;
+  font-weight: 600;
 
 }
