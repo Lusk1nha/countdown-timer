@@ -15,9 +15,9 @@
 }
 
 body {
-  background: linear-gradient(darkorange 55%, orange);
+  background: linear-gradient(darkorange, orange);
 
-  min-height: 70vh;
+  min-height: 100vh;
 
   display: flex;
   align-items: center;
