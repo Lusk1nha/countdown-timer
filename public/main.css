@@ -72,7 +72,7 @@ body {
 
 }
 
-.time:last-child {
+.time.seconds {
   width: 95px;
 
   margin-left: 5px;
@@ -87,7 +87,7 @@ body {
   align-items: center;
   justify-content: center;
 
-  font-size: 2.5em;
+  font-size: 9vmin;
   font-weight: 400;
 
   margin-bottom: 5px;
@@ -102,7 +102,7 @@ body {
 }
 
 .time h5 {
-  font-size: 0.85em;
+  font-size: 3.2vmin;
   font-weight: 600;
 
 }
@@ -118,7 +118,6 @@ body {
   margin-bottom: 30px;
 
   border-top: 1px solid white;
-  
 }
 
 .inputContainer input {
@@ -186,5 +185,62 @@ body {
 .dateButton:hover {
   background-color: #006482;
   color: white;
+
+}
+
+@media (min-width: 600px) {
+  body {
+    min-height: 100vh;
+
+    background: linear-gradient(darkorange, orange);
+
+  }
+
+  #container {
+    max-width: 1100px;
+    width: 90%;
+
+  }
+
+  .timerContainer {
+    height: 300px;
+
+  }
+
+  .time {
+    width: 200px;
+    height: 100%;
+
+  }
+
+  .time.seconds {
+    width: 200px;
+
+  }
+
+  .time span {
+    height: 80px;
+    font-size: 4.5em;
+
+    margin-bottom: 20px;
+
+  }
+
+  .time h5 {
+    font-size: 1.1em;
+
+  }
+
+  .inputContainer {
+    width: 65%;
+
+    padding: 0 25px;
+
+  }
+
+  .dateButton {
+    width: 40%;
+
+  }
 
 }
