@@ -4,15 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cronômetro</title>
+    <title>Temporizador</title>
 
     <link rel="stylesheet" href="./main.css">
     <link rel="shortcut icon" href="./assets/countdown-timer-icon.svg">
   </head>
-  <body>
+  <body onload="getDateNow()">
     <div id="container">
-      <input class="userDate" type="date">
-      <button class="dateButton" type="button">Cronômetrar</button>
+      <div class="timerContainer">
+        <li class="time"><span>2</span> DIAS</li>
+        <li class="time"><span>24</span> HORAS</li>
+        <li class="time"><span>59</span> MINUTOS</li>
+        <li class="time"><span>30</span> SEGUNDOS</li>
+      </div>
+
+      <div class="inputContainer">
+        <input class="userDate" type="date">
+        <button class="actualDateButton" type="button">atual</button>
+      </div>
+
+      <button class="dateButton" type="button">Preview</button>
     </div>
 
     <script src="./index.js"></script>
