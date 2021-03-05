@@ -3,6 +3,7 @@ const dateButton = document.querySelector('.dateButton')
 const currentDateButton = document.querySelector('.currentDateButton')
 
 let today = ''
+let start
 
 dateButton.addEventListener('click', () => {
   if ( !dateInput.value ) return console.error('without value')
@@ -99,6 +100,8 @@ function startingPreview(inputDate, dateNow) {
   const minutesContainer = document.querySelector('.time span.minutes')
   const secondsContainer = document.querySelector('.time span.seconds')
 
+  clearInterval(start)
+
   let days = 0
 
   const yearsToDays = inputDate.year - dateNow.year
@@ -120,11 +123,11 @@ function startingPreview(inputDate, dateNow) {
     if ( days > 1 ) daysContainer.parentElement.hidden = false
 
     daysContainer.innerHTML = days - 1
-    hoursContainer.innerHTML = 24
+    hoursContainer.innerHTML = 1
     minutesContainer.innerHTML = 59
     secondsContainer.innerHTML = 59
 
-    start = setInterval(decreaseSeconds, 60)
+    startingTimer()
 
   } else {
     daysContainer.parentElement.hidden = true
@@ -139,21 +142,46 @@ function startingPreview(inputDate, dateNow) {
 }
 
 function startingTimer() {
-  console.log('---> Starting the timer')  
+  console.log('---> Starting the timer')
+  start = setInterval(decreaseSeconds, 10)
 
 }
 
 function decreaseSeconds() {
   const secondsContainer = document.querySelector('.time span.seconds')
   const minutesContainer = document.querySelector('.time span.minutes')
-  
+  const hoursContainer = document.querySelector('.time span.hours')
+  const daysContainer = document.querySelector('.time span.days')
+
+  if ( hoursContainer.innerHTML == '00' && minutesContainer.innerHTML == '00' && secondsContainer.innerHTML == '00' ) {
+
+    return disableSeconds()
+  }
+
   let seconds = (secondsContainer.innerHTML - 1) < 10 ? '0' + (secondsContainer.innerHTML - 1) : (secondsContainer.innerHTML - 1)
   
   secondsContainer.innerHTML = seconds
   
-  if (seconds == '00') { 
-    minutesContainer.innerHTML -= 1
-    return secondsContainer.innerHTML = 59
+  if (seconds == '00' && minutesContainer.innerHTML != '00') {
+    let minutes = (minutesContainer.innerHTML - 1) < 10 ? '0' + (minutesContainer.innerHTML - 1) : (minutesContainer.innerHTML - 1)
+
+    minutesContainer.innerHTML = minutes
+    secondsContainer.innerHTML = 59
+
+    if ( minutes == '00' && hoursContainer.innerHTML != '00' ) {
+      let hours = (hoursContainer.innerHTML - 1) < 10 ? '0' + (hoursContainer.innerHTML - 1) : (hoursContainer.innerHTML - 1 )
+
+      hoursContainer.innerHTML = hours
+      minutesContainer.innerHTML = 59
+
+      if ( hours == '00' ) {
+        if ( daysContainer.innerHTML != 0 ) {
+          daysContainer.innerHTML = daysContainer.innerHTML - 1
+          hoursContainer.innerHTML = 24
+
+        }
+      }
+    }
   }
 }
 
