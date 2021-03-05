@@ -1,6 +1,6 @@
 const dateInput = document.querySelector('.userDate')
 const dateButton = document.querySelector('.dateButton')
-const actualDateButton = document.querySelector('.actualDateButton')
+const currentDateButton = document.querySelector('.currentDateButton')
 
 let today = ''
 
@@ -10,16 +10,8 @@ dateButton.addEventListener('click', () => {
 
 })
 
-actualDateButton.addEventListener('click', getDateNow)
+currentDateButton.addEventListener('click', getDateNow)
 
-function getDateNow() {
-  // * Updating the date of the input
-
-  const date = dateNow()
-  const dateFormat = formatTransformation(date.year, date.month, date.day)
-
-  return dateInput.value = `${dateFormat.validYear}-${dateFormat.validMonth}-${dateFormat.validDay}`
-}
 
 function dateNow() {
   // * Getting the user PC date
@@ -32,6 +24,7 @@ function dateNow() {
   return { year, month, day }
 }
 
+
 function formatTransformation(year, month, day) {
   // * Transform the numbers add '0' in front of the numbers below 10
 
@@ -41,6 +34,17 @@ function formatTransformation(year, month, day) {
 
   return { validYear, validMonth, validDay }
 }
+
+
+function getDateNow() {
+  // * Updating the date of the input
+
+  const date = dateNow()
+  const dateFormat = formatTransformation(date.year, date.month, date.day)
+
+  return dateInput.value = `${dateFormat.validYear}-${dateFormat.validMonth}-${dateFormat.validDay}`
+}
+
 
 function getInputDate(rawDate) {
   // * Getting the user value in the input
@@ -54,13 +58,14 @@ function getInputDate(rawDate) {
   return { year, month, day }
 }
 
+
 function settingCountDown() {
   const inputValue = getInputDate(dateInput.value)
   const userDate = dateNow()
   
   if((!validateCountDown(inputValue, userDate))) return
-
-  startingTimer(inputValue, userDate)
+  
+  startingPreview(inputValue, userDate)
 
 
   function validateCountDown(inputDate, dateNow) {
@@ -85,17 +90,74 @@ function settingCountDown() {
 
     return true
   }
+}
 
-  function startingTimer(inputDate, dateNow) {
-    const daysContainer = document.querySelector('.time span.days')
 
-    let days = 0
+function startingPreview(inputDate, dateNow) {
+  const daysContainer = document.querySelector('.time span.days')
+  const hoursContainer = document.querySelector('.time span.hours')
+  const minutesContainer = document.querySelector('.time span.minutes')
+  const secondsContainer = document.querySelector('.time span.seconds')
 
-    const yearsToDays = inputDate.year - dateNow.year
-    days += 365 * yearsToDays
+  let days = 0
+
+  const yearsToDays = inputDate.year - dateNow.year
+  days += 365 * yearsToDays
+
+  const monthsToDays = inputDate.month - dateNow.month
+  if ( monthsToDays >= 0 ) {
+    days += (31 * monthsToDays)
+
+  } else {
+    days += (31 * monthsToDays) - (monthsToDays - 2)
+    
+  }
+
+  const daysToDays = inputDate.day - dateNow.day
+  days += daysToDays
+
+  if ( days > 0 ) {
+    if ( days > 1 ) daysContainer.parentElement.hidden = false
+
+    daysContainer.innerHTML = days - 1
+    hoursContainer.innerHTML = 24
+    minutesContainer.innerHTML = 59
+    secondsContainer.innerHTML = 59
+
+    start = setInterval(decreaseSeconds, 60)
+
+  } else {
+    daysContainer.parentElement.hidden = true
 
     daysContainer.innerHTML = days
+    hoursContainer.innerHTML = '00'
+    minutesContainer.innerHTML = '00'
+    secondsContainer.innerHTML = '00'
 
+    return
   }
+}
+
+function startingTimer() {
+  console.log('---> Starting the timer')  
+
+}
+
+function decreaseSeconds() {
+  const secondsContainer = document.querySelector('.time span.seconds')
+  const minutesContainer = document.querySelector('.time span.minutes')
+  
+  let seconds = (secondsContainer.innerHTML - 1) < 10 ? '0' + (secondsContainer.innerHTML - 1) : (secondsContainer.innerHTML - 1)
+  
+  secondsContainer.innerHTML = seconds
+  
+  if (seconds == '00') { 
+    minutesContainer.innerHTML -= 1
+    return secondsContainer.innerHTML = 59
+  }
+}
+
+function disableSeconds() {
+  clearInterval(start)
 
 }
