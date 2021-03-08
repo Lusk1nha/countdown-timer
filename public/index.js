@@ -123,11 +123,11 @@ function startingPreview(inputDate, dateNow) {
     if ( days > 1 ) daysContainer.parentElement.hidden = false
 
     daysContainer.innerHTML = days - 1
-    hoursContainer.innerHTML = 1
+    hoursContainer.innerHTML = 24
     minutesContainer.innerHTML = 59
     secondsContainer.innerHTML = 59
 
-    startingTimer()
+    return startingTimer()
 
   } else {
     daysContainer.parentElement.hidden = true
@@ -142,12 +142,11 @@ function startingPreview(inputDate, dateNow) {
 }
 
 function startingTimer() {
-  console.log('---> Starting the timer')
-  start = setInterval(decreaseSeconds, 10)
+  start = setInterval(decreaseTime, 1000)
 
 }
 
-function decreaseSeconds() {
+function decreaseTime() {
   const secondsContainer = document.querySelector('.time span.seconds')
   const minutesContainer = document.querySelector('.time span.minutes')
   const hoursContainer = document.querySelector('.time span.hours')
@@ -155,7 +154,8 @@ function decreaseSeconds() {
 
   if ( hoursContainer.innerHTML == '00' && minutesContainer.innerHTML == '00' && secondsContainer.innerHTML == '00' ) {
 
-    return disableSeconds()
+    return clearInterval(start)
+
   }
 
   let seconds = (secondsContainer.innerHTML - 1) < 10 ? '0' + (secondsContainer.innerHTML - 1) : (secondsContainer.innerHTML - 1)
@@ -183,9 +183,4 @@ function decreaseSeconds() {
       }
     }
   }
-}
-
-function disableSeconds() {
-  clearInterval(start)
-
 }
